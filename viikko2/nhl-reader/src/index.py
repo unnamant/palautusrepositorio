@@ -1,8 +1,8 @@
-from player import PlayerReader, PlayerStats
 from rich.console import Console
 from rich.table import Table
+from player import PlayerReader, PlayerStats
 
-def main():
+def main(): # pylint: disable=too-many-statements
     url = "https://studies.cs.helsinki.fi/nhlstats/2024-25/players"
     reader = PlayerReader(url)
     stats = PlayerStats(reader)
@@ -11,7 +11,6 @@ def main():
     nationality = input("Nationality: ")
 
     players = stats.top_scorers_by_nationality(nationality)
-    
     console = Console()
 
     table = Table(title=f"{season} players from {nationality}")
@@ -22,7 +21,8 @@ def main():
     table.add_column("Points", justify="right", style="yellow")
 
     for player in players:
-        table.add_row(player.name, player.team, str(player.goals), str(player.assists), str(player.goals + player.assists))
+        table.add_row(player.name, player.team,
+                      str(player.goals), str(player.assists), str(player.goals + player.assists))
 
     console.print(table)
 

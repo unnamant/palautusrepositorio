@@ -1,26 +1,26 @@
 import requests
 
-class Player:
-    def __init__(self, dict):
-        self.name = dict['name']
-        self.team = dict['team']
-        self.goals = dict['goals'] 
-        self.nationality = dict['nationality']
-        self.assists = dict['assists']
+class Player: # pylint: disable=too-few-public-methods
+    def __init__(self, p_dict):
+        self.name = p_dict['name']
+        self.team = p_dict['team']
+        self.goals = p_dict['goals']
+        self.nationality = p_dict['nationality']
+        self.assists = p_dict['assists']
 
     def __str__(self):
-        return f"{self.name} {self.team} {self.goals} + {self.assists} = {self.goals + self.assists}"
+        return f"{self.name}{self.team} {self.goals} + {self.assists} = {self.goals + self.assists}"
 
-class PlayerReader:
+class PlayerReader: # pylint: disable=too-few-public-methods
     def __init__(self, url: str):
         self.url = url
 
     def get_players(self):
-        response = requests.get(self.url).json()
+        response = requests.get(self.url, timeout=10).json()
 
         players = []
-        for player_dict in response: 
-            player = Player(player_dict) 
+        for player_dict in response:
+            player = Player(player_dict)
             players.append(player)
 
         return players
@@ -35,7 +35,7 @@ class PlayerStats:
         for player in self.players:
             if player.nationality == nationality:
                 players.append(player)
-        sorted_players = sorted(players, key=lambda player: player.goals + player.assists, reverse=True)
+        sorted_players=sorted(players, key=lambda player: player.goals + player.assists, reverse=True)
         return sorted_players
 
     def __str__(self):
