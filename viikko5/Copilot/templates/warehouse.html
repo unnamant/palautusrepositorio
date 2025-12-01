@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Varasto: {{ warehouse.name }}</h2>
+<h3>Tuotteet</h3>
+<form action="{{ url_for('product_add', w_id=warehouse.id) }}" method="post">
+  <input type="text" name="name" placeholder="Tuotteen nimi" required>
+  <input type="number" name="quantity" placeholder="Määrä" min="0" value="0">
+  <button type="submit">Lisää tuote</button>
+</form>
+
+{% for p in products %}
+  <div class="card">
+    <strong>{{ p.name }}</strong> — määrä: {{ p.quantity }}
+    <form action="{{ url_for('product_delete', p_id=p.id) }}" method="post" style="display:inline">
+      <button type="submit">Poista</button>
+    </form>
+  </div>
+{% else %}
+  <p>Ei tuotteita.</p>
+{% endfor %}
+
+<p><a href="{{ url_for('index') }}">Takaisin varastolistaan</a></p>
+{% endblock %}
