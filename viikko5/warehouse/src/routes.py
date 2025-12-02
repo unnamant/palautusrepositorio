@@ -38,6 +38,12 @@ def view_warehouse(warehouse_id):
     order = request.args.get('order', 'asc')
     search = request.args.get('search', '').strip()
 
+    # Validate sort parameters
+    if sort_by not in ['name', 'quantity']:
+        sort_by = 'name'
+    if order not in ['asc', 'desc']:
+        order = 'asc'
+
     products = Product.query.filter_by(warehouse_id=warehouse_id)
 
     if search:

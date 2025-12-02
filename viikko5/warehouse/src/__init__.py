@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+import secrets
 
 db = SQLAlchemy()
 
@@ -10,7 +11,7 @@ def create_app(test_config=None):
 
     if test_config is None:
         app.config.from_mapping(
-            SECRET_KEY='dev-secret-key',
+            SECRET_KEY=os.environ.get('SECRET_KEY', secrets.token_hex(32)),
             SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(
                 app.instance_path, 'warehouse.db'
             ),
