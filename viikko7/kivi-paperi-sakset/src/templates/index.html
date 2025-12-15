@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kivi-Paperi-Sakset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #c8e6c9 0%, #ffcdd2 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid #66bb6a;
+        }
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(255, 192, 203, 0.3);
+        }
+        h2 {
+            color: #d81b60;
+            margin-top: 30px;
+        }
+        .mode-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        button {
+            background: linear-gradient(135deg, #4caf50 0%, #ff8a95 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+        }
+        .description {
+            background: linear-gradient(to right, #e8f5e9, #fce4ec);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 2px solid #ffb3c1;
+            color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Kivi-Paperi-Sakset</h1>
+        
+        <h2>Valitse pelimuoto:</h2>
+        
+        <div class="description">
+            ⭐ Ensimmäinen 3 pistettä saanut voittaa pelin!
+        </div>
+        
+        <form action="/start" method="post">
+            <div class="mode-buttons">
+                <button type="submit" name="mode" value="a">
+                    👥 Ihmistä vastaan
+                </button>
+                <button type="submit" name="mode" value="b">
+                    🤖 Tekoälyä vastaan (helppo)
+                </button>
+                <button type="submit" name="mode" value="c">
+                    🧠 Parannettua tekoälyä vastaan
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

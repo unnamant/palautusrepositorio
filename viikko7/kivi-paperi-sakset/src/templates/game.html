@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelaa - Kivi-Paperi-Sakset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #c8e6c9 0%, #ffcdd2 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid #66bb6a;
+        }
+        h1 { 
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255, 192, 203, 0.3);
+        }
+        .score {
+            background: linear-gradient(to right, #e8f5e9, #fce4ec);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 2px solid #ffb3c1;
+            color: #1b5e20;
+        }
+        .score h2 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #4caf50 0%, #ff8a95 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;
+            flex: 1;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        button:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+        }
+        .result {
+            background: linear-gradient(135deg, #66bb6a 0%, #ffb3c1 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #81c784 0%, #f48fb1 100%);
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .back-btn:hover { 
+            transform: translateY(-2px);
+        }
+        a { text-decoration: none; }
+        .player-indicator {
+            background: linear-gradient(135deg, #4caf50 0%, #ff8a95 100%);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if session.get('mode') == 'a' and current_player == 1 %}
+        <div class="player-indicator">
+            👤 PELAAJA 1:n VUORO
+        </div>
+        {% endif %}
+        
+        <h1>🎮 Kivi-Paperi-Sakset</h1>
+        
+        <div class="score">
+            <h2>📊 Tilanne (Ensimmäiseksi 3 pistettä saanut voittaa!)</h2>
+            {% if session.get('mode') == 'a' %}
+            <p><strong>Pelaaja 1:</strong> {{ tuomari.ekan_pisteet }} pistettä</p>
+            <p><strong>Pelaaja 2:</strong> {{ tuomari.tokan_pisteet }} pistettä</p>
+            {% else %}
+            <p><strong>Sinä:</strong> {{ tuomari.ekan_pisteet }} pistettä</p>
+            <p><strong>Vastustaja:</strong> {{ tuomari.tokan_pisteet }} pistettä</p>
+            {% endif %}
+            <p><strong>Tasapelit:</strong> {{ tuomari.tasapelit }}</p>
+        </div>
+
+        {% if session.get('last_result') %}
+        <div class="result">
+            <h3>{{ session['last_result']['message'] }}</h3>
+            {% if session.get('mode') == 'a' %}
+            <p>Pelaaja 1: {{ session['last_result']['player'] }} | Pelaaja 2: {{ session['last_result']['computer'] }}</p>
+            {% else %}
+            <p>Sinä: {{ session['last_result']['player'] }} | Vastustaja: {{ session['last_result']['computer'] }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <h3>Tee siirtosi:</h3>
+        <form action="/play" method="post">
+            <div class="buttons">
+                <button type="submit" name="choice" value="k">🪨 Kivi</button>
+                <button type="submit" name="choice" value="p">📄 Paperi</button>
+                <button type="submit" name="choice" value="s">✂️ Sakset</button>
+            </div>
+        </form>
+
+        <a href="/">
+            <button class="back-btn">🏠 Takaisin alkuun</button>
+        </a>
+    </div>
+</body>
+</html>

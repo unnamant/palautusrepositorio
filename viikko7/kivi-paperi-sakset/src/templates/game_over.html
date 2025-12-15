@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peli päättyi - Kivi-Paperi-Sakset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #c8e6c9 0%, #ffcdd2 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid #66bb6a;
+        }
+        h1 { 
+            color: #2e7d32;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(255, 192, 203, 0.3);
+        }
+        .winner-announcement {
+            background: linear-gradient(135deg, #66bb6a 0%, #ffb3c1 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        .final-score {
+            background: linear-gradient(to right, #e8f5e9, #fce4ec);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #ffb3c1;
+        }
+        .final-score h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        .score-line {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #1b5e20;
+        }
+        .play-again-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #ff8a95 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .play-again-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Peli päättyi!</h1>
+        
+        <div class="winner-announcement">
+            🏆 {{ winner }} voitti pelin! 🏆
+        </div>
+        
+        <div class="final-score">
+            <h2>📊 Lopputilanne</h2>
+            {% if mode == 'a' %}
+            <div class="score-line"><strong>Pelaaja 1:</strong> {{ tuomari.ekan_pisteet }} voittoa</div>
+            <div class="score-line"><strong>Pelaaja 2:</strong> {{ tuomari.tokan_pisteet }} voittoa</div>
+            {% else %}
+            <div class="score-line"><strong>Sinä:</strong> {{ tuomari.ekan_pisteet }} voittoa</div>
+            <div class="score-line"><strong>Vastustaja:</strong> {{ tuomari.tokan_pisteet }} voittoa</div>
+            {% endif %}
+            <div class="score-line"><strong>Tasapelit:</strong> {{ tuomari.tasapelit }}</div>
+        </div>
+
+        <a href="/" class="play-again-btn">🔄 Pelaa uudelleen</a>
+    </div>
+</body>
+</html>

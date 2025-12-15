@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelaaja 2 - Kivi-Paperi-Sakset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffcdd2 0%, #c8e6c9 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid #ff8a95;
+        }
+        h1 { 
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(200, 230, 201, 0.3);
+        }
+        h2 { 
+            color: #d81b60;
+        }
+        .score {
+            background: linear-gradient(to right, #fce4ec, #e8f5e9);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 2px solid #66bb6a;
+            color: #880e4f;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #ff8a95 0%, #4caf50 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;
+            flex: 1;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        button:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+        }
+        .player-indicator {
+            background: linear-gradient(135deg, #ff8a95 0%, #4caf50 100%);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="player-indicator">
+            👤 PELAAJA 2:n VUORO
+        </div>
+        
+        <h1>🎮 Kivi-Paperi-Sakset</h1>
+        
+        <div class="score">
+            <h2>📊 Tilanne (Ensimmäiseksi 3 pistettä saanut voittaa!)</h2>
+            <p><strong>Pelaaja 1:</strong> {{ tuomari.ekan_pisteet }} pistettä</p>
+            <p><strong>Pelaaja 2:</strong> {{ tuomari.tokan_pisteet }} pistettä</p>
+            <p><strong>Tasapelit:</strong> {{ tuomari.tasapelit }}</p>
+        </div>
+
+        <h3>Pelaaja 2, tee siirtosi:</h3>
+        <form action="/play" method="post">
+            <div class="buttons">
+                <button type="submit" name="choice" value="k">🪨 Kivi</button>
+                <button type="submit" name="choice" value="p">📄 Paperi</button>
+                <button type="submit" name="choice" value="s">✂️ Sakset</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
